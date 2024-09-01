@@ -1,0 +1,1 @@
+{"name":"Local: digSumEqualX","url":"d:\\CPP\\digSumEqualX.cpp","tests":[{"id":1709124892266,"input":"10 20 5","output":"2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\digSumEqualX.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\CPP\\DRMC\\a.cpp","tests":[{"id":1715001535780,"input":"4\n2 1\n4 3 \n2 2\n4 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\DRMC\\a.cpp","group":"local","local":true}

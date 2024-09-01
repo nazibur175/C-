@@ -1,0 +1,1 @@
+{"name":"Local: 2darray_prefix_sum","url":"d:\\CPP\\Code Snipet\\2darray_prefix_sum.cpp","tests":[{"id":1697621937076,"input":"3 3\n1 2 3\n4 5 6\n7 8 9","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\2darray_prefix_sum.cpp","group":"local","local":true}

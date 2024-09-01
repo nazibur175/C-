@@ -1,0 +1,1 @@
+{"name":"Local: square_root_decom","url":"d:\\CPP\\Code Snipet\\square_root_decom.cpp","tests":[{"id":1700135161896,"input":"10 5\n1 4 2 1 1 5 2 7 8 7\n3 3\n4 5\n2 7\n7 10\n5 10","output":"1\n1\n4\n3\n5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\square_root_decom.cpp","group":"local","local":true}

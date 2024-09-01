@@ -1,0 +1,1 @@
+{"name":"Local: minimum_divisor_using_seive","url":"d:\\CPP\\minimum_divisor_using_seive.cpp","tests":[{"id":1699077196427,"input":"5\n4\n8\n9\n12\n15","output":"2\n2\n3\n2\n3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\minimum_divisor_using_seive.cpp","group":"local","local":true}

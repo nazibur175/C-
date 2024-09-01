@@ -1,0 +1,1 @@
+{"name":"Local: maximum_palindromic_substring","url":"d:\\CPP\\maximum_palindromic_substring.cpp","tests":[{"id":1709094111081,"input":"5\naxyyx","output":"4"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\maximum_palindromic_substring.cpp","group":"local","local":true}
