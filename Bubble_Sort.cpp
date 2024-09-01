@@ -1,10 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long 
-#define   mod             1000000007
+#define   mod             10000007
 #define test int t; cin>>t; while(t--)
-const int N=1e5+10;
+const int N=1e6+10;
 int a[N];
+int c=0;
 void merge(int l,int r,int mid){
     int l_sz = mid-l+1;
     int L[l_sz+1];
@@ -23,12 +24,14 @@ void merge(int l,int r,int mid){
         if(L[l_i]<= R[r_i]){
             a[i]=L[l_i];
             l_i ++;
+         
         }
         else{
             a[i] = R[r_i];
             r_i++;
-            // inversion count 
-            // c+=(l_sz-l_i);
+            c+=(l_sz-l_i);
+            c=c%mod;
+         
         }
     }
     }
@@ -40,18 +43,23 @@ void merge(int l,int r,int mid){
         merge(l,r,mid); 
     }
 
-void solve(){
-    int n;
-    cin>>n;
-    
-for(int i=0;i<n;i++){
-    cin>>a[i];
-}
+void solve(){ 
+
+  int t;
+  cin>>t;
+  for(int tt=1;tt<=t;tt++){
+  int n;
+  cin>>n;
+  memset(a,0,sizeof(a));
+  for(int i=0;i<n;i++){
+      cin>>a[i];
+  }
+
     mergeSort(0,n-1);
-    for(int i=0;i<n;i++){
-        cout<<a[i]<<" ";
-    }
-    cout<<endl;
+    cout<<"Case "<<tt<<": ";
+    cout<<c<<endl;
+    c=0;
+  }
 }
 
 int32_t main()

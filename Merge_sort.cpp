@@ -3,8 +3,9 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-const int N=1e5+10;
+const int N=1e6+10;
 int a[N];
+int c=0;
 void merge(int l,int r,int mid){
     int l_sz = mid-l+1;
     int L[l_sz+1];
@@ -23,12 +24,12 @@ void merge(int l,int r,int mid){
         if(L[l_i]<= R[r_i]){
             a[i]=L[l_i];
             l_i ++;
+            c++;
         }
         else{
             a[i] = R[r_i];
             r_i++;
-            // inversion count 
-            // c+=(l_sz-l_i);
+            c++;
         }
     }
     }
@@ -49,9 +50,11 @@ for(int i=0;i<n;i++){
 }
     mergeSort(0,n-1);
     for(int i=0;i<n;i++){
-        cout<<a[i]<<" ";
+        cout<<a[i];
+        if(i!=n-1) cout<<" ";
     }
     cout<<endl;
+    cout<<c<<endl;
 }
 
 int32_t main()
