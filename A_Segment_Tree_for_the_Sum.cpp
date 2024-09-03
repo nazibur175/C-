@@ -52,7 +52,7 @@ void update(int root , int b , int e , int i , int newval){
     tree[root] = (tree[left] + tree[right]);
 }
 void solve(){
-        int n,q;
+    int n,q;
         cin>>n>>q;
     for(int i=1;i<=n;i++){
         cin>>a[i];
@@ -62,13 +62,18 @@ void solve(){
     {
         int x,k,u;
         cin>>x>>k>>u;
-       
+
         if(x==1){
-            //call it by update(root,array start , array end , query index , val);
+            // k=index u=val
+            // index   val
+            k++;
             update(1,1,n,k,u);
             }
         else{
-            // call it by query(root,array start , array end , query start , query end);
+            // k=l   u=r
+            // range
+            k++;
+            //u++;
             cout<<query(1,1,n,k,u)<<endl;
         }
     }

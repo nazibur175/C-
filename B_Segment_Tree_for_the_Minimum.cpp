@@ -4,13 +4,22 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 const int Ma = 1000000;
+pair<int,int> inf={1e17,0};
 int a[Ma];
-int tree[Ma*3];
-
+//int tree[Ma*3];
+vector<pair<int,int>>v(Ma*3,{0,0});
 // call it by init(root, array start , array end);
+pair<int,int> operation(pair<int,int>x , pair<int,int>y){
+    if(x.first==y.first){
+        return {x.first,x.second+y.second};
+    }
+    else if(x.first>y.first) return x;
+    else return y;
+}
 void init(int root, int b , int e){
     if(b==e){
-        tree[root]=a[b];
+        //tree[root]=a[b];
+        v[root]={a[b],1};
         return ;
     }
     int left = 2*root;
@@ -18,22 +27,23 @@ void init(int root, int b , int e){
     int mid = (b+e)/2;
     init(left,b,mid);
     init(right,mid+1, e);
-    tree[root]=tree[left] + tree[right];
+    //tree[root]=min(tree[left] , tree[right]) ;
+    v[root]=operation(v[left],v[right]);
 }
 // call it by query(root,array start , array end , query start , query end);
-int query(int root, int b , int e , int i, int j){
+pair<int,int> query(int root, int b , int e , int i, int j){
     if(i>e || j<b ){
-        return 0;
+        return inf;
     }
     if(b>=i && e<=j){
-        return tree[root];
+        return v[root];
     }
     int left = 2*root;
     int right = 2*root + 1;
     int mid = (b+e)/2;
-    int p1 = query(left , b , mid, i, j);
-    int p2 = query(right, mid+1, e , i, j);
-    return p1+p2;
+    pair<int,int> p1 = query(left , b , mid, i, j);
+    pair<int,int> p2 = query(right, mid+1, e , i, j);
+    return operation(p1,p2);
 }
 //call it by update(root,array start , array end , query index , val);
 void update(int root , int b , int e , int i , int newval){
@@ -41,7 +51,7 @@ void update(int root , int b , int e , int i , int newval){
         return ;
     }
     if(b>=i && e<=i){
-        tree[root]= newval;
+        v[root]= {newval,1};
         return;
     }
     int left = 2*root;
@@ -49,10 +59,10 @@ void update(int root , int b , int e , int i , int newval){
     int mid = (b+e)/2;
     update(left , b , mid , i , newval);
     update(right , mid+1 , e , i , newval);
-    tree[root] = (tree[left] + tree[right]);
+    v[root] = operation(v[left] , v[right]);
 }
 void solve(){
-        int n,q;
+    int n,q;
         cin>>n>>q;
     for(int i=1;i<=n;i++){
         cin>>a[i];
@@ -62,14 +72,19 @@ void solve(){
     {
         int x,k,u;
         cin>>x>>k>>u;
-       
+
         if(x==1){
-            //call it by update(root,array start , array end , query index , val);
+            // k=index u=val
+            // index   val
+            k++;
             update(1,1,n,k,u);
             }
         else{
-            // call it by query(root,array start , array end , query start , query end);
-            cout<<query(1,1,n,k,u)<<endl;
+            // k=l   u=r
+            // range
+            k++;
+            //u++;
+            cout<<query(1,1,n,k,u).first<<endl;
         }
     }
 }

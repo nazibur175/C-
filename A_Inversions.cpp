@@ -6,20 +6,20 @@ using namespace std;
 const int Ma = 1000000;
 int a[Ma];
 int tree[Ma*3];
-
+int inv[Ma]={0};
 // call it by init(root, array start , array end);
-void init(int root, int b , int e){
-    if(b==e){
-        tree[root]=a[b];
-        return ;
-    }
-    int left = 2*root;
-    int right = 2*root+1;
-    int mid = (b+e)/2;
-    init(left,b,mid);
-    init(right,mid+1, e);
-    tree[root]=tree[left] + tree[right];
-}
+// void init(int root, int b , int e){
+//     if(b==e){
+//         tree[root]=a[b];
+//         return ;
+//     }
+//     int left = 2*root;
+//     int right = 2*root+1;
+//     int mid = (b+e)/2;
+//     init(left,b,mid);
+//     init(right,mid+1, e);
+//     tree[root]=tree[left] + tree[right];
+// }
 // call it by query(root,array start , array end , query start , query end);
 int query(int root, int b , int e , int i, int j){
     if(i>e || j<b ){
@@ -52,26 +52,17 @@ void update(int root , int b , int e , int i , int newval){
     tree[root] = (tree[left] + tree[right]);
 }
 void solve(){
-        int n,q;
-        cin>>n>>q;
+    int n;
+    cin>>n;
     for(int i=1;i<=n;i++){
         cin>>a[i];
     }
-    init(1,1,n);
-    while (q--)
-    {
-        int x,k,u;
-        cin>>x>>k>>u;
-       
-        if(x==1){
-            //call it by update(root,array start , array end , query index , val);
-            update(1,1,n,k,u);
-            }
-        else{
-            // call it by query(root,array start , array end , query start , query end);
-            cout<<query(1,1,n,k,u)<<endl;
-        }
+    for(int i=1;i<=n;i++){
+        int x= query(1,1,n,a[i]+1,n);
+        cout<<x<<" ";
+        update(1,1,n,a[i],1);
     }
+    cout<<endl;
 }
 int32_t main()
 {
