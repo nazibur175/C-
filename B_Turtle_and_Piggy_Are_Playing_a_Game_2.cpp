@@ -4,7 +4,15 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    
+    test{
+        int n;
+        cin>>n;
+        int a[n];
+        for(int i=0;i<n;i++) cin>>a[i];
+        sort(a,a+n);
+        int in = (n+2)/2;
+        cout<<a[in-1]<<endl;
+    }
 
 }
 int32_t main()
