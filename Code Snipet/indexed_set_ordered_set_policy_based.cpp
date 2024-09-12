@@ -19,4 +19,5 @@
 //s.erase(s.lower_bound({val,0}));
 
 //order_of_key (k) : Number of items strictly smaller than k .
+//int x = s.order_of_key(a[i]);
 //find_by_order(k) : K-th element in a set (counting from zero). It's Return Iterator
