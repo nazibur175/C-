@@ -11,8 +11,10 @@
 
 // We can use here pair to store dupplicate elements
 // s.insert({a[i],i});
+
 //It's return the targeted index valu
 //int x=(*s.find_by_order(in)).first; 
+
 //It's erase the first value which is occur in the set 
 //s.erase(s.lower_bound({val,0}));
 

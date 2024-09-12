@@ -1,21 +1,22 @@
-// void sieve(int n)
+// const int N=1e8;
+//int prime[N];
+// vector<int> seive()
 // {
-//     int prime[n+3];
-// 	memset(prime,0,sizeof(prime));
- 
-// 	for(int i=2;i*i<=n;i++)
+// 	for(int i=2;i*i<=N;i++)
 // 	{
 // 		if(prime[i]==0)
 // 		{
-// 			for(int j=i*i;j<=n;j+=i)
+// 			for(int j=i*i;j<=N;j+=i)
 // 			{
 // 				prime[j]=1;
 // 			}
 // 		}
 // 	}
-// 	for(int i=2;i<=n;i++)
+//     vector<int>v;
+// 	for(int i=2;i<=N;i++)
 // 	{
-// 		if(prime[i]==0)cout<<i<<" ";
+// 		if(prime[i]==0)
+//             v.push_back(i);
 // 	}
-// 	cout<<endl;
+// 	return v;
 // }
