@@ -1,6 +1,6 @@
 /*
 
-SubArray: 
+SubArray/ substring: 
 n*(n+1)/2;
 Contigiuous + ordered.
 

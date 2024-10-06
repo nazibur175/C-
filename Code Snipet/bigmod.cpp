@@ -10,3 +10,18 @@
 //     }
 // }
 
+
+// Preferable to use this bigmod function because I get memory limit excedded on 
+// NCPC Problem link:https://lightoj.com/problem/rik-vik
+
+// int bigmod(int a, int b) {
+//     int res = 1;
+//     while (b > 0) {
+//         if (b % 2 == 1) {
+//             res = (res * a) % mod;
+//         }
+//         a = (a * a) % mod;
+//         b /= 2;
+//     }
+//     return res;
+// }

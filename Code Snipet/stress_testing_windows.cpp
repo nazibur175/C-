@@ -47,6 +47,6 @@
 
 // Run the above three file
 // Go to the File
-// Open CMD
-// run (press enter)
+// Open CMD (from the top)
+// write run (press enter)
 // Go to the in and out file (Here you can show the desired input)

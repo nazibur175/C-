@@ -11,3 +11,18 @@
 //         }
 //     }
 //     cout<<r<<endl;
+
+
+
+// int l=0;
+// int high=inf;
+// while (r-l>1)
+// {
+//     int mid = (l+r)/2;
+//     if(ok(mid)){
+//         l=mid;
+//     }
+//     else{
+//         h=mid
+//     } 
+// }

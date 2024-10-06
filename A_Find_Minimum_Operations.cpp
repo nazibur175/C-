@@ -4,11 +4,23 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    int x=5;
-    x = x&(~(1<<2));
-    cout<<x<<endl;
+    test{
+    int n,k;
+    cin>>n>>k;
+    int op=0;
+    if (k==1) {
+        cout<<n<<endl;
+    }
+    else {
+        int cnt=0;
+        while(n) {
+            cnt=cnt + n%k;  
+            n=n/k;       
+        }
 
-    // output: 1
+    cout<<cnt<<endl;
+    }
+}
 
 }
 int32_t main()

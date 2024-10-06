@@ -1,0 +1,1 @@
+{"name":"Local: segment_eqal_or_not_checking","url":"d:\\CPP\\Code Snipet\\segment_eqal_or_not_checking.cpp","tests":[{"id":1727869610469,"input":"7 3\n1 2 3 1 2 3 0\n1 2 4 5\n1 2 6 7\n3 3 6 6","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\segment_eqal_or_not_checking.cpp","group":"local","local":true}

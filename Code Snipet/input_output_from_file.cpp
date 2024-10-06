@@ -22,3 +22,7 @@ int main() {
     cout << setprecision(10) << fixed << angle <<endl;
     return 0;
 }
+
+
+//freopen("metaa.in", "r", stdin);
+//freopen("metaa.out", "w", stdout);
