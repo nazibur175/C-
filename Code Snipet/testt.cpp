@@ -4,10 +4,7 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    int a,b;
-    cin>>a>>b;
-    if(a==2) a++;
-    cout<<a+b<<endl;
+    
 
 }
 int32_t main()
