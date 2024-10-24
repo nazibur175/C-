@@ -1,1 +1,1 @@
-cout
+generateMountainNumbers

@@ -24,13 +24,11 @@ void unionBySize(int u, int v) {
     int ulp_u = findUPar(u); 
     int ulp_v = findUPar(v); 
     if (ulp_u == ulp_v) return; 
-    if (sizee[ulp_u] < sizee[ulp_v]) {
-        parent[ulp_u] = ulp_v;
-        sizee[ulp_v] += sizee[ulp_u];
-    } else {
-        parent[ulp_v] = ulp_u;
-        sizee[ulp_u] += sizee[ulp_v];
-    }
+    if(sizee[ulp_u] < sizee[ulp_v]) 
+        swap(ulp_u, ulp_v);
+    parent[ulp_v] = ulp_u;
+    sizee[ulp_u] += sizee[ulp_v];
+    
 }
 void solve(){
 

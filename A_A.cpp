@@ -4,20 +4,18 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-      int n;
-      cin>>n;
-      int a[n];
-      for(int i=0;i<n;i++) cin>>a[i];
-      map<int,int>m;
-      // m[1]=1;
-      // m[2]=1;
-      // m[3]=1;
-      // m[5]=2;
-
+      string s;
+      cin>>s;
+      int n=s.size();
+      int f=0;
       for(int i=0;i<n;i++){
-            m[a[i]]++;
+            if(s[i]=='7'){
+                  f=1;
+                  break;
+            }
       }
-      cout<<m[5]<<endl;
+      if(f) cout<<"Yes"<<endl;
+      else cout<<"No"<<endl;
 
 }
 int32_t main()

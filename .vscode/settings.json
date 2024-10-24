@@ -89,5 +89,6 @@
         "format": "cpp",
         "stacktrace": "cpp"
     },
-    "C_Cpp.default.compilerPath": "C:\\mingw64\\bin\\gcc.exe"
+    "C_Cpp.default.compilerPath": "C:\\mingw64\\bin\\gcc.exe",
+    "C_Cpp.errorSquiggles": "disabled"
 }

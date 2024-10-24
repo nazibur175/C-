@@ -91,14 +91,19 @@ void num(int l, int r, int n) {
 signed main()
 {
     //num(1,20,100);
-    int t=rand(1,100);
+    int t=rand(1,2);
     cout<<t<<endl;
-
     while (t--)
     {
-        int x=rand(1,100);
-        int y=rand(1,100);
+        int n=rand(1,5);
+        cout<<n<<endl;
+        for(int i=0;i<n;i++){
+        int x=rand(1,2*n);
+        int y=rand(1,2*n);
+        x=min(x,y);
+        y=max(x,y);
         cout<<x<<" "<<y<<endl;
+        }
     }
     
 
