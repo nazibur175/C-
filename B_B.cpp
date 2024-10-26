@@ -6,26 +6,31 @@ using namespace std;
 void solve(){
     int n;
     cin>>n;
-    int nn=7;
-    int a[nn+9];
-    for(int i=1;i<=nn;i++){
+    int a[n];
+    for(int i=0;i<n;i++){
         cin>>a[i];
     }
-    int temp=0;
-    int ans=0;
-    while (1)
-    {
-        for(int i=1;i<=nn;i++){
-            temp+=a[i];
-            if(temp>=n){
-                ans=i;
-                break;
+    sort(a,a+n);
+    int f=0;
+    if(n>=50) {
+        cout<<"Yes"<<endl;
+        return;
+    }
+    else {
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                for(int k=j+1;k<n;k++){
+                    for(int l=k+1;l<n;l++){
+                        if((a[i]^a[j]^a[k]^a[l])==0){
+                            cout<<"Yes"<<endl;
+                            return;
+                        }
+                    }
+                }
             }
         }
-        if(ans) break;
     }
-    cout<<ans<<endl;
-    
+    cout<<"No"<<endl;
 
 }
 int32_t main()
