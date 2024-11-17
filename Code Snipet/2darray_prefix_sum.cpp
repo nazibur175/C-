@@ -17,6 +17,7 @@ void solve(){
     pre[1][1]=a[1][1];
     for(int i=2;i<=n;i++) pre[1][i]=a[1][i]+pre[1][i-1];
     for(int i=2;i<=n;i++) pre[i][1]=a[i][1]+pre[i-1][1];
+    
     for(int i=2;i<=n;i++){
         for(int j=2;j<=n;j++){
             pre[i][j]=pre[i-1][j]+pre[i][j-1]+a[i][j]-pre[i-1][j-1];

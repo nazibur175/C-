@@ -1,5 +1,5 @@
 // const int N=1e8;
-//int prime[N];
+//int prime[N+9];
 // vector<int> seive()
 // {
 // 	for(int i=2;i*i<=N;i++)

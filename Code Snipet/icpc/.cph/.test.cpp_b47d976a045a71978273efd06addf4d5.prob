@@ -1,0 +1,1 @@
+{"name":"Local: test","url":"d:\\CPP\\Code Snipet\\icpc\\test.cpp","tests":[{"id":1731143870628,"input":"2\n2 10\n3 1\n6 3\n1 1\n2 1","output":"Case 1: 4\n"},{"id":1731144896518,"input":"1\n1 3\n3 2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\icpc\\test.cpp","group":"local","local":true}

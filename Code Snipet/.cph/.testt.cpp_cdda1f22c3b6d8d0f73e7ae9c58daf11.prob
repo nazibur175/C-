@@ -1,1 +1,1 @@
-{"name":"Local: testt","url":"d:\\CPP\\Code Snipet\\testt.cpp","tests":[{"id":1729414980188,"input":"","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\testt.cpp","group":"local","local":true}
+{"name":"Local: testt","url":"d:\\CPP\\Code Snipet\\testt.cpp","tests":[{"id":1731060488942,"input":"2\nA U\n1 8\n","output":"1 94\n2 47\n4 24\n5 19\n10 10\n20 5\n\n1 94\n7 14\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\testt.cpp","group":"local","local":true}
