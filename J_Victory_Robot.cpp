@@ -4,7 +4,13 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    cout<<-3%4<<endl;
+    test{
+        int n;
+        cin>>n;
+        if(n==1971) cout<<"Joy Bangla"<<endl;
+        else if(n%2==0) cout<<"Bangla"<<endl;
+        else cout<<"Joy"<<endl;
+    }
 
 }
 int32_t main()
