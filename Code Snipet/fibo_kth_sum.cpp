@@ -1,6 +1,5 @@
 // get k-th Fibonacci number where first and second Fibonacci is a and b
 // int get_kth(int a,int b,int k){
-
 // 	a%=mod;
 // 	b%=mod;
 // 	if(k==1) return a;
