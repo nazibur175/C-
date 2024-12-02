@@ -1,1 +1,1 @@
-{"name":"Local: testtttt","url":"d:\\CPP\\testtttt.cpp","tests":[{"id":1727874125362,"input":"4\n3\n0 10\n0 10\n0 10\n4\n0 3\n1 4\n1 2\n0 10\n2\n5 10\n0 5\n2\n1 2\n4 10\n","output":"Case #1: 0.3\nCase #2: 1.5\nCase #3: -1\nCase #4: 0.5\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\testtttt.cpp","group":"local","local":true}
+{"name":"Local: testtttt","url":"d:\\CPP\\testtttt.cpp","tests":[],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\testtttt.cpp","group":"local","local":true}

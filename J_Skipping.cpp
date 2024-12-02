@@ -47,7 +47,6 @@ void solve(){
         for(int i=1;i<=n;i++) cin>>b[i];
         vector<int>edge[n+5], cost[n+5];
         for(int i=1;i<=n;i++){
-            // i to b[i] with cost a[i]
             edge[i].push_back(b[i]);
             cost[i].push_back(a[i]);
             if(i>1){
