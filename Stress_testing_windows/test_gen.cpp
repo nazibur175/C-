@@ -95,16 +95,11 @@ signed main()
     cout<<t<<endl;
     while (t--)
     {
-        int n=rand(1,5);
-        cout<<n<<endl;
-        for(int i=0;i<n;i++){
-        int x=rand(1,2*n);
-        int y=rand(1,2*n);
+        int x=rand(1,100);
+        int y=rand(1,100);
         x=min(x,y);
         y=max(x,y);
         cout<<x<<" "<<y<<endl;
-        }
-    }
+}
     
-
 }
