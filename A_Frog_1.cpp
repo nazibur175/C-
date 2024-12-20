@@ -11,13 +11,13 @@ int minimum(int pos){
     if(pos==n){
         return 0;
     }
-    int x=0;
-    if(dp[pos]!=-1) return dp[pos];
+    auto &ans=dp[pos];
+    if(~ans) return ans;
     if(pos+1<=n)
-        x= minimum(pos+1) + abs(a[pos]-a[pos+1]);
+        ans= minimum(pos+1) + abs(a[pos]-a[pos+1]);
     if(pos+2<=n)
-        x= min(x,minimum(pos+2) + abs(a[pos]-a[pos+2]));
-    return dp[pos]=x;
+        ans= min(ans,minimum(pos+2) + abs(a[pos]-a[pos+2]));
+    return ans;
     
 }
 void solve(){

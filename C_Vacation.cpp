@@ -9,12 +9,13 @@ int a[N],b[N],c[N];
 int dp[N][4];
 int cal(int pos,int f){
     if(pos>=n) return 0;
-    if(dp[pos][f]!=-1) return dp[pos][f];
+    int &ans=dp[pos][f];
+    if(ans!=-1) return ans;
     int x=0,y=0,z=0;
     if(f!=1) x=cal(pos+1,1)+a[pos];
     if(f!=2) y=cal(pos+1,2)+b[pos];
     if(f!=3) z=cal(pos+1,3)+c[pos];
-    return dp[pos][f]=max({x,y,z});
+    return ans=max({x,y,z});
 }
 void solve(){
     cin>>n;

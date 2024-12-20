@@ -8,17 +8,18 @@ int dp[N];
 int a[N];
 int n;
 int k;
-int minimum(int pos){
+int cal(int pos){
     if(pos==n){
         return 0;
     }
-    int x=INT64_MAX;
-    if(dp[pos]!=-1) return dp[pos];
+    int &ans=dp[pos];
+    if(~ans) return ans;
+    ans=INT64_MAX;
     for(int kk=1;kk<=k;kk++){
         if(pos+kk<=n)
-        x=min(x,minimum(pos+kk)+ abs(a[pos]-a[pos+kk]));
+        ans=min(ans,cal(pos+kk)+ abs(a[pos]-a[pos+kk]));
     }
-        return dp[pos]=x;
+        return ans;
     
 }
 void solve(){
@@ -27,8 +28,8 @@ void solve(){
         cin>>a[i];
     }
     memset(dp,-1,sizeof(dp));
-    // cout<<minimum(1)<<endl;
-    minimum(1);
+    // cout<<cal(1)<<endl;
+    cal(1);
     cout<<dp[1]<<endl;
 
 }

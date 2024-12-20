@@ -10,12 +10,13 @@ int v[100+9];
 int dp[109][N];
 int knapsack(int i,int weight){
     if(i==n) return 0;
-    if(dp[i][weight] !=-1) return dp[i][weight];
-    int ans=knapsack(i+1,weight);
+    int &ans=dp[i][weight];
+    if(~ans) return ans;
+    ans=knapsack(i+1,weight);
     if(weight+ w[i]<=x){
         ans=max(ans,knapsack(i+1,weight+w[i])+v[i]);
     } 
-    return dp[i][weight]=ans;
+    return ans;
 }
 void solve(){
     cin>>n>>x;
