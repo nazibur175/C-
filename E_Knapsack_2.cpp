@@ -3,25 +3,42 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-int n,W;
-int w[100+1];
-int v[100+1];
-int knapsack(int pos, int weight){
-    if(pos==n+1) return 0;
-    int temp = knapsack(pos+1,weight);
-    
-    if((w[pos]+weight)<=W){
-        temp = max(temp, knapsack(pos+1,weight+w[pos])+v[pos]);
+int wt[105],val[105];
+int dp[105][100000+5];
+int n,w;
+int cal(int pos,int cur_val){
+    if(pos==n)
+    {
+        return (cur_val==0)?0:INT_MAX;
     }
-    return temp;
-    
+    int &ans=dp[pos][cur_val];
+    if(ans!=-1)
+    {
+        return ans;
+    }
+    ans=cal(pos+1,cur_val);
+    if(cur_val>=val[pos])
+    {
+        ans=min(ans,wt[pos]+cal(pos+1,cur_val-val[pos]));
+    }
+    return ans;
 }
 void solve(){
-    cin>>n>>W;
-    for(int i=1;i<=n;i++) cin>>w[i]>>v[i];
+    cin>>n>>w;
+    for(int i=0;i<n;i++)
+    {
+        cin>>wt[i]>>val[i];
+    }
+    memset(dp,-1,sizeof(dp));
+    for(int i=100000;i>=0;i--)
+    {
+        if(cal(0,i)<=w)
+        {
+            cout<<i<<endl;
+            return;
+        }
+    }
 
-    int ans = knapsack(1,0);
-    cout<<ans<<endl;
 }
 int32_t main()
 {

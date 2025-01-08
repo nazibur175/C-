@@ -5,20 +5,23 @@ using namespace std;
 #define test int t; cin>>t; while(t--)
 void solve(){
     test{
-        int a,b;
+        int n;
+        cin>>n;
+        string a,b;
         cin>>a>>b;
-        // a=big
-        // b=small
-        if(a<b) swap(a,b);
-        int diff=a-b;
         int ans=0;
-        a-=diff*2;
-        b-=diff;
-        if(a%3==0 && a>=0 && b>=0 ){
-            ans=1;
+        int one=0;
+        int cnt=0;
+        for(int i=0;i<n;i++){
+            if(a[i]=='1' || b[i]=='1') one=1;
+            if(a[i]=='1' && b[i]=='1') cnt++;
+            if(a[i]!=b[i]){
+                ans=1;
+                break;
+            }
         }
-        if((a==0 && b) || (b==0 && a)) ans=0;
         if(ans) cout<<"YES"<<endl;
+        else if(cnt%2) cout<<"YES"<<endl;
         else cout<<"NO"<<endl;
     }
 
