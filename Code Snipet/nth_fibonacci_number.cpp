@@ -1,3 +1,8 @@
+// f(0) = 0;
+// f(1) = 1;
+// f(2) = 1;
+// using Binet's formula we can calculate nth fibonacci number
+
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long 
@@ -6,9 +11,9 @@ using namespace std;
 void solve(){
     int n;
     cin>>n;
-    int up = powl((1+sqrtl(5)),n)-powl((1-sqrtl(5)),n);
-    int dow = pow(2,n)*sqrtl(5);
-    cout<<up/dow<<endl;
+    int lob = powl((1+sqrtl(5)),n)-powl((1-sqrtl(5)),n);
+    int hor = pow(2,n)*sqrtl(5);
+    cout<<lob/hor<<endl;
 
 }
 int32_t main()

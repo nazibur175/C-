@@ -4,11 +4,11 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    int n;
-    cin>>n;
-    int up = powl((1+sqrtl(5)),n)-powl((1-sqrtl(5)),n);
-    int dow = pow(2,n)*sqrtl(5);
-    cout<<up/dow<<endl;
+    test{
+        int n,m;
+        cin>>n>>m;
+        cout<<max(n,m)+1<<endl;
+    }
 
 }
 int32_t main()
