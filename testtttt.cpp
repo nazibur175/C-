@@ -3,12 +3,22 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
+int lcm(int x,int y){
+    return x*y/ gcd(x,y);
+}
 void solve(){
     int n;
     cin>>n;
-    int up = powl((1+sqrtl(5)),n)-powl((1-sqrtl(5)),n);
-    int dow = pow(2,n)*sqrtl(5);
-    cout<<up/dow<<endl;
+    int a[n];
+    for(int i=0;i<n;i++) cin>>a[i];
+    int ans=0;
+
+    for(int j=0;j<n;j++){
+        for(int k=0;k<n;k++){
+            ans+=lcm(a[j],a[k]);
+        }
+    }
+    cout<<ans<<endl;
 
 }
 int32_t main()
