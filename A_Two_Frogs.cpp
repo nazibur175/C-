@@ -4,7 +4,12 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    
+    test{
+        int n,a,b;
+        cin>>n>>a>>b;
+        if(abs(a-b)%2==0) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
 
 }
 int32_t main()
