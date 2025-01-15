@@ -1,0 +1,1 @@
+{"name":"Local: Trie","url":"d:\\CPP\\Code Snipet\\Trie.cpp","tests":[{"id":1736949505696,"input":"5\nab\nac\nabc\nacde\nabcd\n2\nabd\nabc","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\Trie.cpp","group":"local","local":true}
