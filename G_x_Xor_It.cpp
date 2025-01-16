@@ -3,23 +3,23 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-
-const int N=1e4+5;
+const int N=2e5+5;
 struct node{
-    int next[26];
+    int next[2];
     int endpoint;
     node(){
         memset(next,0,sizeof(next));
         endpoint=0;
     }
-}trie[N*26];
+}trie[N*2];
 
 int root=0;
 int last=0;
-void Add(string s){
+const int NN=31;
+void Add(int val){
     int cur=root;
-    for(auto it:s){
-        int c=it-'a';
+    for(int i=NN;i>=0;i--){
+        bool c=(1<<i)&val;
         if(trie[cur].next[c]){
             cur=trie[cur].next[c];
         }
@@ -30,38 +30,44 @@ void Add(string s){
     }
     trie[cur].endpoint++;
 }
-int query(string s){
+int query(int val){
     int cur=root;
-    for(auto it:s){
-        int c=it-'a';
+    int ans=0;
+    for(int i=NN;i>=0;i--){
+        bool c=(1<<i)&val;
+        c=(c^1);
         if(trie[cur].next[c]){
             cur=trie[cur].next[c];
+            ans|=(1<<i);
         }
         else{
-            return 0;
+            cur=trie[cur].next[c^1];
         }
     }
-    return trie[cur].endpoint;
+    return ans;
 }
 void cleartrie(){
     last=0;
     memset(trie,0,sizeof(trie));
 }
 void solve(){
-    cleartrie();
-    int n;
-    cin>>n;
-    for(int i=0;i<n;i++){
-        string s;
-        cin>>s;
-        Add(s);
-    }
-    int q;
-    cin>>q;
-    while(q--){
-        string s;
-        cin>>s;
-        cout<<query(s)<<endl;
+    test{
+        cleartrie();
+        int n,k;
+        cin>>n>>k;
+        int a[n];
+        for(int i=0;i<n;i++){
+            cin>>a[i];
+        }
+        int pre=0;
+        int ans=0;
+        Add(0);
+        for(int i=0;i<n;i++){
+            pre^=a[i];
+            ans=max(ans,query(pre^k));
+            Add(pre);
+        }
+        cout<<(ans^k)<<endl;
     }
 
 }
