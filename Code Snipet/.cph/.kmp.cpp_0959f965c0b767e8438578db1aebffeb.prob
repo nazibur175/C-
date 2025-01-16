@@ -1,0 +1,1 @@
+{"name":"Local: kmp","url":"d:\\CPP\\Code Snipet\\kmp.cpp","tests":[{"id":1736996717612,"input":"aabbaabba","output":"0 1 0 0 1 2 3 4 5 "}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\kmp.cpp","group":"local","local":true}
