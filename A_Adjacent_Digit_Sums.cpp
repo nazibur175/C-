@@ -4,9 +4,18 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    int x = 1e15;
-    int ans = sqrtl(x); 
-    cout<<ans<<endl; 
+    test{
+        int x,y;
+        cin>>x>>y;
+        while (x>y)
+        {
+            x-=9;
+        }
+        if(x+1==y) cout<<"Yes"<<endl;
+        else cout<<"No"<<endl;
+        
+    }
+
 }
 int32_t main()
 {

@@ -1,1 +1,1 @@
-generateMountainNumbers
+cout << ans_dist << endl;

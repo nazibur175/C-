@@ -4,9 +4,18 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    int x = 1e15;
-    int ans = sqrtl(x); 
-    cout<<ans<<endl; 
+    test{
+        string s;
+        cin>>s;
+        int n=s.size();
+        string ans;
+        for(int i=0;i<n-2;i++){
+            ans.push_back(s[i]);
+        }
+        ans.push_back('i');
+        cout<<ans<<endl;
+    }
+
 }
 int32_t main()
 {
