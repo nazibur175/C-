@@ -4,8 +4,12 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 void solve(){
-    
-
+    test{
+        int a,b,c;
+        cin>>a>>b>>c;
+        if(a+b==c) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
 
 }
 int32_t main()

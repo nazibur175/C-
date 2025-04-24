@@ -1,13 +1,13 @@
 // f(0) = 0;
 // f(1) = 1;
 // f(2) = 1;
-// using Binet's formula we can calculate nth fibonacci number
 
 #include<bits/stdc++.h>
 using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
+// using Binet's formula we can calculate nth fibonacci number
 void solve(){
     int n;
     cin>>n;
