@@ -3,7 +3,7 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-const int N=4e6;
+const int N=9e6;
 int prime[N+9];
 vector<int> seive()
 {
