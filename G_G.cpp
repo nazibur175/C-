@@ -3,30 +3,87 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-int lcm(int a,int b){
-    return(a*b)/gcd(a,b);
+map<int,int>m;
+map<int,int>changed;
+int n,k,q;
+int check(int x){
+    if(changed[x]){
+        return m[x];
+    }
+    else return x<=k;
 }
-int inf=1e5;
 void solve(){
-    vector<int>a{1,3,6,10,15};
-    vector<int>dp(16000+9,inf);
-    for(auto x:a){
-        dp[x]=1;
-    }
-    for(int i=1;i<=1600;i++){
-        for(auto x:a){
-            dp[i+x]=min(dp[i+x],dp[i]+1);
+    int t;
+    cin>>t;
+    for(int tc=1;tc<=t;tc++){
+        m.clear();
+        changed.clear();
+        cin>>n>>k>>q;
+        int hole=1;
+        cout<<"Case "<<tc<<":"<<endl;
+        while(q--){
+            int x,y;
+            cin>>x>>y;
+            // For x
+            if(x==1){
+                if(check(x+1)){
+                    hole++;
+                }
+                    changed[x]=1;
+                    m[x]=0;
+
+            }
+            else if(x==n){
+                if(check(x-1)){
+                    hole++;
+                }
+                    changed[x]=1;
+                    m[x]=0;
+                
+            }
+            else if(check(x+1)==0 && check(x-1)==0){
+                hole--;
+                changed[x]=1;
+                m[x]=0;
+            }
+            else{
+                if(check(x+1) && check(x-1)){
+                    hole++;
+                }
+                changed[x]=1;
+                m[x]=0;
+            }
+
+        // for y
+        if(y==1){
+            if(check(y+1)){
+                hole--;
+            }
+            changed[y]=1;
+            m[y]=1;
         }
-    }
-    //for(int i=0;i<=30;i++) cout<<dp[i]<<endl;
-    test{
-        int n;
-        cin>>n;
-        int ans = (n/1500)*100;
-        n=n%1500;
-        ans+=dp[n];
-        cout<<ans<<endl;
-        //cout<<1<<endl;
+        else if(y==n){
+            if(check(y-1)){
+                hole--;
+            }
+            changed[y]=1;
+            m[y]=1;
+        }
+        else {
+            if(check(y-1)==0 && check(y+1)==0){
+                hole++;
+            }
+            else if(check(y-1)==1 && check(y+1)==1){
+                hole--;
+            }
+            changed[y]=1;
+            m[y]=1;
+        }
+        cout<<hole<<endl;
+
+
+        }
+        
     }
 
 }

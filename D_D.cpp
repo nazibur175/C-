@@ -6,45 +6,39 @@ using namespace std;
 void solve(){
     int n;
     cin>>n;
+    vector<int>ans;
     int a[n];
-    for(int i=0;i<n;i++) cin>>a[i];
-    int pre[n+1]={0};
-    int post[n+1]={0};
-    for(int i=0;i<n;i++){
-        pre[i]=post[i]=1;
+    for(int i=0;i<n;i++)cin>>a[i];
+    if(n==1){
+        cout<<"1 1"<<endl;
+        cout<<"1"<<endl;
+        cout<<"1 1"<<endl;
+        cout<<"1"<<endl;
+        cout<<"1 1"<<endl;
+        a[0]+=2;
+        cout<<-1*a[0]<<endl;
     }
-    int cnt=0;
-    for(int i=1;i<n;i++){
-        if(a[i-1]<a[i]){
-            //cnt++;
-            pre[i]=pre[i-1]+pre[i];
+    else{
+        cout<<"1 1"<<endl;
+        cout<<-1*a[0]<<endl;
+        cout<<"2 "<<n<<endl;
+        for(int i=1;i<n;i++){
+            cout<<(n-1)*(a[i]);
+            if(i!=n-1) cout<<" ";
+            a[i]+= (n-1)*(a[i]);
         }
-        // else cnt=0;
-    }
-    // cnt=0;
-    for(int i=n-2;i>=0;i--){
-        if(a[i]<a[i+1]){
-            // cnt++;
-            post[i]=post[i+1]+post[i];
+        cout<<endl;
+        cout<<"1 "<<n<<endl;
+        cout<<0<<" ";
+        for(int i=1;i<n;i++){
+            cout<<-1*(a[i]);
+            if(i!=n-1)cout<<" ";
         }
-        // else cnt=0;
+        cout<<endl;
     }
-    // for(int i=0;i<n;i++){
-    //     cout<<pre[i]<<" ";
-    // }
-    // cout<<endl;
-    // for(int i=0;i<n;i++){
-    //     cout<<post[i]<<" ";
-    // }
-    // cout<<endl;
-    int ans= pre[n-1];
-    for(int i=0;i<n-2;i++){
-        if(a[i]<a[i+2]){
-            ans = max(ans,pre[i]+post[i+2]);
-        }
-    }
-    cout<<ans<<endl;
 
+    
+    
 
 }
 int32_t main()

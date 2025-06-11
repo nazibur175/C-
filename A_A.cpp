@@ -3,19 +3,29 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
+bool isprime(int n){
+	if(n<2) return false;
+	if(n<=3) return true;
+	if(n%2==0) return false;
+	for(int i=3;i<=sqrt(n);i+=2){
+		if(n%i==0) return false;
+	}
+	return true;
+}
+
 void solve(){
-      string s;
-      cin>>s;
-      int n=s.size();
-      int f=0;
-      for(int i=0;i<n;i++){
-            if(s[i]=='7'){
-                  f=1;
+      int n;
+      cin>>n;
+      int a=2*n;
+      int b=n;
+      while(1){
+            if(isprime(a)==0 && isprime(b)==0){
+                  cout<<a<<" "<<b<<endl;
                   break;
             }
+            a++;
+            b++;
       }
-      if(f) cout<<"Yes"<<endl;
-      else cout<<"No"<<endl;
 
 }
 int32_t main()

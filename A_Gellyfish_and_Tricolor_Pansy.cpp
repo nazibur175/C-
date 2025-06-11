@@ -5,12 +5,12 @@ using namespace std;
 #define test int t; cin>>t; while(t--)
 void solve(){
     test{
-        int a,b;
-        cin>>a>>b;
-        int x=a%b;
-        if(x==0) cout<<x<<endl;
-        else 
-        cout<<b-x<<endl;
+        int a,b,c,d;
+        cin>>a>>b>>c>>d;
+        a=min(a,c);
+        b=min(b,d);
+        if(a>=b) cout<<"Gellyfish"<<endl;
+        else cout<<"Flower"<<endl;
     }
 
 }

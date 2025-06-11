@@ -3,20 +3,20 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-vector<int>v[200005];
-int a[200005];
-int mx[200005], mn[200005];
+const int N=2e5+9;
+vector<int>edge[N];
+int a[N];
+int mx[N], mn[N];
 void dfs(int nd, int par) {
     if (par==-1) {
         mx[nd]=a[nd];
         mn[nd]=a[nd];
     } 
     else{
-        mx[nd] = max(a[nd],a[nd]-mn[par]);
-        mn[nd] = min(a[nd],a[nd]-mx[par]);
+        mx[nd]=max(a[nd],a[nd]-mn[par]);
+        mn[nd]=min(a[nd],a[nd]-mx[par]);
     }
-
-    for (int ch:v[nd]){
+    for (int ch:edge[nd]){
         if(ch!=par){
             dfs(ch,nd);
         }
@@ -28,24 +28,23 @@ void solve(){
         cin>>n;
         for (int i=1; i<=n;i++) {
             cin>>a[i];
-            v[i].clear();
+            edge[i].clear();
             mx[i]=0;
             mn[i]=0;
         }
-
-        for (int i = 1; i <= n - 1; i++) {
-            int x, y;
-            cin >> x >> y;
-            v[x].push_back(y);
-            v[y].push_back(x);
+        for (int i=0;i<n-1;i++){
+            int x,y;
+            cin>>x>>y;
+            edge[x].push_back(y);
+            edge[y].push_back(x);
         }
-
-        dfs(1, -1); // root is 1, parent is -1 (no parent)
-
-        for (int i = 1; i <= n; i++) {
-            cout << mx[i] << " ";
+        
+        dfs(1,-1);
+        for (int i=1;i<=n;i++){
+            cout<<mx[i];
+            if(i!=n)cout<<" ";
         }
-        cout << "\n";
+        cout<<endl;
     }
 
 }
