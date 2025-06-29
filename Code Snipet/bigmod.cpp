@@ -11,7 +11,7 @@
 // }
 
 
-// Preferable to use this bigmod function because I get memory limit excedded on 
+// Preferable to use below bigmod function because I get memory limit excedded on 
 // NCPC Problem link:https://lightoj.com/problem/rik-vik
 
 // int bigmod(int a, int b) {
