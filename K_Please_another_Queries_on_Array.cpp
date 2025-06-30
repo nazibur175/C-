@@ -1,163 +1,157 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define mod 1000000007
-#define int2 uint8_t
 #define int long long
-#define rt ((root << 1) | 1)
-#define lf (root << 1)
-const int N = 4e5 + 5;
-const int NN = 309;
-int arr[N];
-int prime[NN + 9];
+const int N = 400000;
+const int NN = 300;
+int arr[N + 5];
+int prime[NN + 5];
 vector<int> primes;
-vector<map<int2, int>> tree(4 * N);
-vector<map<int2, int>> lazy(4 * N);
-vector<vector<int>> factor(301, vector<int>(65, 0));
+uint64_t factor_mask[NN + 5];
 
 void seive() {
-    for (int i = 2; i * i <= NN; i++) {
-        if (prime[i] == 0) {
-            for (int j = i * i; j <= NN; j += i) {
-                prime[j] = 1;
-            }
-        }
-    }
-    for (int i = 2; i <= NN; i++) {
-        if (prime[i] == 0)
-            primes.push_back(i);
-    }
+    vector<bool> is_com(NN + 1);
+    for (int i = 2; i * i <= NN; i++) if (!is_com[i])
+        for (int j = i * i; j <= NN; j += i)
+            is_com[j] = true;
+    for (int i = 2; i <= NN; i++) if (!is_com[i])
+        primes.push_back(i);
 }
 
 void precompute() {
     seive();
-    for (int i = 1; i <= 300; i++) {
-        int x = i;
-        for (int j = 0; j < primes.size(); j++) {
-            while (x % primes[j] == 0) {
-                factor[i][j]++;
-                x /= primes[j];
+    for (int x = 1; x <= NN; x++) {
+        uint64_t m = 0;
+        int v = x;
+        for (int i = 0; i < primes.size(); i++) {
+            if (v % primes[i] == 0) {
+                m |= (1ULL << i);
+                while (v % primes[i] == 0) v /= primes[i];
             }
-            if (x == 1) break;
         }
+        factor_mask[x] = m;
     }
 }
+
+int bigmod(int a, int e) {
+    int res = 1;
+    while (e) {
+        if (e & 1) res = res * a % mod;
+        a = a * a % mod;
+        e >>= 1;
+    }
+    return res;
+}
+
+// Node storage: prod and mask
+ int tree_prod[4 * N + 5];
+ uint64_t tree_mask[4 * N + 5];
+ int lazy_mul[4 * N + 5];
+ uint64_t lazy_mask[4 * N + 5];
 
 struct Seg_tree {
     Seg_tree() {}
 
-    map<int2, int> milao(const map<int2, int> &x, const map<int2, int> &y) {
-        map<int2, int> res = x;
-        for (auto it : y) {
-            res[it.first] += it.second;
-        }
-        return res;
+    // merge two segments
+    inline void milao(int root) {
+        int l = root << 1, r = l | 1;
+        tree_prod[root] = (int)(tree_prod[l] * tree_prod[r] % mod);
+        tree_mask[root] = tree_mask[l] | tree_mask[r];
     }
 
-    void push(int root, int lo, int hi) {
-        if (lazy[root].empty()) return;
-        for (auto it : lazy[root]) {
-            tree[root][it.first] += it.second * (hi - lo + 1);
-        }
-        if (lo != hi) {
-            for (auto it : lazy[root]) {
-                lazy[lf][it.first] += it.second;
-                lazy[rt][it.first] += it.second;
-            }
-        }
-        lazy[root].clear();
+    // apply lazy to node
+    inline void apply(int root, int lo, int hi, int mul, uint64_t msk) {
+        int len = hi - lo + 1;
+        tree_prod[root] = (int)(tree_prod[root] * bigmod(mul, len) % mod);
+        tree_mask[root] |= msk;
+        lazy_mul[root] = (int)(lazy_mul[root] * mul % mod);
+        lazy_mask[root] |= msk;
     }
 
-    void prop(int root) {
-        tree[root] = milao(tree[lf], tree[rt]);
+    // push lazy down
+    inline void push(int root, int lo, int hi) {
+        if (lazy_mul[root] == 1 && lazy_mask[root] == 0) return;
+        int mid = (lo + hi) >> 1;
+        apply(root << 1, lo, mid, lazy_mul[root], lazy_mask[root]);
+        apply(root << 1 | 1, mid + 1, hi, lazy_mul[root], lazy_mask[root]);
+        lazy_mul[root] = 1;
+        lazy_mask[root] = 0;
     }
 
     void build(int root, int lo, int hi) {
-        lazy[root].clear();
+        lazy_mul[root] = 1;
+        lazy_mask[root] = 0;
         if (lo == hi) {
-            for (int i = 0; i < primes.size(); i++) {
-                if (factor[arr[lo]][i]) {
-                    tree[root][i] = factor[arr[lo]][i];
-                }
-            }
+            tree_prod[root] = arr[lo] % mod;
+            tree_mask[root] = factor_mask[arr[lo]];
             return;
         }
         int mid = (lo + hi) >> 1;
-        build(lf, lo, mid);
-        build(rt, mid + 1, hi);
-        prop(root);
+        build(root << 1, lo, mid);
+        build(root << 1 | 1, mid + 1, hi);
+        milao(root);
     }
 
-    void update(int root, int lo, int hi, int i, int j, int val) {
-        push(root, lo, hi);
-        if (j < lo || hi < i) return;
-        if (i <= lo && hi <= j) {
-            for (int k = 0; k < primes.size(); k++) {
-                if (factor[val][k]) {
-                    lazy[root][k] += factor[val][k];
-                }
-            }
-            push(root, lo, hi);
+    void update(int root, int lo, int hi, int l, int r, int val) {
+        if (r < lo || hi < l) return;
+        if (l <= lo && hi <= r) {
+            apply(root, lo, hi, val, factor_mask[val]);
             return;
         }
+        push(root, lo, hi);
         int mid = (lo + hi) >> 1;
-        update(lf, lo, mid, i, j, val);
-        update(rt, mid + 1, hi, i, j, val);
-        prop(root);
+        update(root << 1, lo, mid, l, r, val);
+        update(root << 1 | 1, mid + 1, hi, l, r, val);
+        milao(root);
     }
 
-    map<int2, int> query(int root, int lo, int hi, int i, int j) {
+    pair<int, uint64_t> query(int root, int lo, int hi, int l, int r) {
+        if (r < lo || hi < l) return {1, 0ULL};
+        if (l <= lo && hi <= r) return {tree_prod[root], tree_mask[root]};
         push(root, lo, hi);
-        if (i > hi || lo > j) return {};
-        if (i <= lo && hi <= j) return tree[root];
         int mid = (lo + hi) >> 1;
-        return milao(query(lf, lo, mid, i, j), query(rt, mid + 1, hi, i, j));
+        auto left = query(root << 1, lo, mid, l, r);
+        auto right = query(root << 1 | 1, mid + 1, hi, l, r);
+        return { (int)(left.first * right.first % mod), left.second | right.second };
     }
 };
-
-int bigmod(int a, int b) {
-    int res = 1;
-    while (b > 0) {
-        if (b % 2 == 1) res = (res * a) % mod;
-        a = (a * a) % mod;
-        b /= 2;
-    }
-    return res;
-}
 
 void solve() {
     precompute();
     int n, q;
     cin >> n >> q;
     for (int i = 1; i <= n; i++) cin >> arr[i];
+
     Seg_tree seg;
     seg.build(1, 1, n);
+
     while (q--) {
-        string s;
-        cin >> s;
-        if (s == "TOTIENT") {
+        string op;
+        cin >> op;
+        if (op == "MULTIPLY") {
+            int l, r, x;
+            cin >> l >> r >> x;
+            seg.update(1, 1, n, l, r, x);
+        } else { // TOTIENT
             int l, r;
             cin >> l >> r;
-            map<int2, int> res = seg.query(1, 1, n, l, r);
-            int ans = 1;
-            for (auto it : res) {
-                int p = primes[it.first];
-                int e = it.second;
-                if (e == 0 || p == 0) continue;
-                int t1 = bigmod(p, e - 1);
-                int t2 = t1 * (p - 1) % mod;
-                ans = ans * t2 % mod;
+            auto res = seg.query(1, 1, n, l, r);
+            int ans = res.first;
+            uint64_t m = res.second;
+            for (int i = 0; i < primes.size(); i++) {
+                if (m & (1ULL << i)) {
+                    ans = (int)(ans * (primes[i] - 1) % mod);
+                    ans = (int)(ans * bigmod(primes[i], mod - 2) % mod);
+                }
             }
-            cout << ans << "\n";
-        } else {
-            int l, r, val;
-            cin >> l >> r >> val;
-            seg.update(1, 1, n, l, r, val);
+            cout << ans << '\n';
         }
     }
 }
 
 int32_t main() {
-    ios_base::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
     solve();
+    return 0;
 }

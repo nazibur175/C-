@@ -4,86 +4,69 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 vector<int> parent, sizee; 
-set<int>v[200005];
-set<int>quer[200005];
+int timee[200005];
+
 void makeSet(int n) {
     parent.resize(n + 1);
     sizee.resize(n + 1);
     for (int i = 0; i <= n; i++) {
         parent[i] = i;
         sizee[i] = 1;
-        v[i].insert(i);
+        timee[i]=mod;
     }
 }
 
 int findUPar(int node) {
     if (node == parent[node]) 
         return node; 
-    return parent[node] = findUPar(parent[node]);
+    return findUPar(parent[node]);
 }
-
-map<pair<int,int>,int>ans;
-void unionBySize(int uu, int vv,int time) {
-    int ulp_u = findUPar(uu); 
-    int ulp_v = findUPar(vv); 
+void unionBySize(int u, int v,int t) {
+    int ulp_u = findUPar(u); 
+    int ulp_v = findUPar(v); 
     if (ulp_u == ulp_v) return; 
     if(sizee[ulp_u] < sizee[ulp_v]) 
-    swap(ulp_u, ulp_v);
-    for(auto it:v[ulp_v]){
-        vector<int> temp;
-        for(auto q:quer[it]){
-            if(v[ulp_u].find(q) != v[ulp_u].end()){
-                ans[{it,q}] = time;
-                ans[{q,it}] = time;
-                temp.push_back(q);
-            }
-        }
-        for(auto q:temp){
-            quer[it].erase(q);
-            quer[q].erase(it);
-        }
-    }
-    for(auto it:v[ulp_v]){
-        v[ulp_u].insert(it);
-    }
-    //v[ulp_v].clear();
+        swap(ulp_u, ulp_v);
     parent[ulp_v] = ulp_u;
     sizee[ulp_u] += sizee[ulp_v];
+    timee[ulp_v]=t;
 }
-
-
+int cal(int u,int v){
+    int t=0;
+    while(u!=v){
+        if(timee[u]<timee[v]){
+            t=timee[u];
+            if(u==parent[u]) return -1;
+            u=parent[u];
+        }
+        else {
+            t=timee[v];
+            if(v==parent[v]) return -1;
+            v=parent[v];
+        }
+       
+    }
+    return t;
+}
 void solve(){
     int n,m,q;
     cin>>n>>m>>q;
     makeSet(n);
-    vector<pair<int,int>> edges(m);
     for(int i=0;i<m;i++){
         int u,v;
         cin>>u>>v;
-        edges[i] = {u,v};
+        unionBySize(u, v, i+1);
     }
-    vector<pair<int,int>> queries(q);
-    for(int i=0;i<q;i++){
+    // for(int i=1;i<=n;i++){
+    //     cout<<timee[i]<<" ";
+    // }
+    // cout<<"\n";
+    while(q--){
         int u,v;
         cin>>u>>v;
-        queries[i] = {u,v};
-        quer[u].insert(v);
-        quer[v].insert(u);
+        cout<<cal(u, v)<<"\n";
     }
-    for(int i=0;i<m;i++){
-        int u = edges[i].first;
-        int v = edges[i].second;
-        unionBySize(u,v,i+1);
-    }
-    for(int i=0;i<q;i++){
-        int u = queries[i].first;
-        int v = queries[i].second;
-        if(findUPar(u) == findUPar(v)){
-            cout<<ans[{u,v}]<<"\n";
-        }else{
-            cout<<-1<<"\n";
-        }
-    }
+
 }
 int32_t main()
 {
