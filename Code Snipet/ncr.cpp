@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 1e6 + 9, mod = 1e9 + 7;
 #define int long long int
+const int N = 1e6 + 9, mod = 1e9 + 7;
 int f[N], inv[N], finv[N];
 void prec() {
   f[0] = 1;

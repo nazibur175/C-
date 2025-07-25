@@ -1,3 +1,39 @@
+Step-1:
+create a file with the name: ran.bat and write the below code
+
+@echo off
+g++ -std=c++17 -o test_gen.exe test_gen.cpp
+g++ -std=c++17 -o my_sol.exe my_sol.cpp
+g++ -std=c++17 -o brute.exe brute.cpp
+for /l %%x in (1, 1, 500) do (
+    test_gen > input.in
+    my_sol < input.in > wrong_output.out 
+    brute < input.in > correct_output.out
+    fc wrong_output.out correct_output.out > diagnostics || exit /b
+    echo %%x
+)
+echo all tests passed
+pause
+
+
+Step 2:
+Create a file named "brute.cpp" and write your brute-force solution in it.
+
+	int a,b;
+	cin>>a>>b;
+	cout<<a+b<<endl;
+
+Step 3:
+Create a file named "my_sol.cpp" and write the solution you want to test in it.
+
+	int a,b;
+	cin>>a>>b;
+	if(a==1)a++;
+	cout<<a+b<<endl;
+
+Step 4:
+Create a file named test_gen.cpp and write the code below with the desired changes.
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -91,14 +127,21 @@ void num(int l, int r, int n) {
 signed main()
 {
     
-       int tc=rand (1,10);
-	cout<<tc<<endl;
-	while(tc--){
-	int x=rand(1,10);
+       int x=rand(1,10);
        int y=rand(1,10);
         
        cout<<x<<" "<<y<<endl;
-}
 
     
 }
+
+Step 5:
+Go to your folder and open Command Prompt from there.
+Run the file "run.bat"
+
+Step 6:
+Open the "diagnostics" file, which will be created automatically.
+There, you can see both the correct output and the incorrect output (if any).
+
+Step 7:
+Open the "input.in" file to see the input for which your solution produced the wrong output.
