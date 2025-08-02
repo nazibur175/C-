@@ -84,6 +84,8 @@ int32_t main() {
   cin.tie(0);
   prec();
   int n;
+  string s;
+  cin>>s;
   // while (cin >> n) {
   //   string s, p;
   //   cin >> p >> s;

@@ -32,7 +32,7 @@ struct PersistentSegTree {
     }
 
     Node* build(int lo, int hi) {
-        if (lo == hi) return newNode(arr[lo]);
+        if (lo == hi) return newNode(0);
         int mid = (lo + hi) >> 1;
         Node* L = build(lo, mid);
         Node* R = build(mid + 1, hi);

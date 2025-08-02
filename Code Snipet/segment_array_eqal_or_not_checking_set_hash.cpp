@@ -18,11 +18,11 @@ int bigmod(int a, int b) {
     return res;
 }
 
-mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-    int my_rand(int l, int r)
-    {
-    	return uniform_int_distribution<int>(l, r) (rng);
-    }
+// mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+//     int my_rand(int l, int r)
+//     {
+//     	return uniform_int_distribution<int>(l, r) (rng);
+//     }
 
 
 
