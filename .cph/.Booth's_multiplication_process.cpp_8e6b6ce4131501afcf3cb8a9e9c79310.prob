@@ -1,1 +1,0 @@
-{"name":"Local: Booth's_multiplication_process","url":"d:\\CPP\\Booth's_multiplication_process.cpp","tests":[{"id":1698640879218,"input":"10110011\n11010101","output":"00011001110111100"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Booth's_multiplication_process.cpp","group":"local","local":true}

@@ -3,67 +3,64 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-// Use double for floating point 
-struct pt {
+struct P{
     int x, y;
-    bool operator == (pt const& t) const {
-        return x == t.x && y == t.y;
+    bool operator < (const P& p) const {
+        return x < p.x || (x == p.x && y < p.y);
+    }
+    bool operator == (const P& p) const {
+        return x == p.x && y == p.y;
     }
 };
 
-int orientation(pt a, pt b, pt c) {
-    int v = a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y);
-    if (v < 0) return -1; // clockwise
-    if (v > 0) return +1; // counter-clockwise
-    return 0;
+// Cross product of OA and OB 
+int cross(const P& O, const P& A, const P& B) {
+    return (A.x - O.x) * (B.y - O.y) - 
+           (A.y - O.y) * (B.x - O.x);
 }
 
-bool cw(pt a, pt b, pt c, bool include_collinear) {
-    int o = orientation(a, b, c);
-    return o < 0 || (include_collinear && o == 0);
-}
-bool collinear(pt a, pt b, pt c) { return orientation(a, b, c) == 0; }
+//Monotone Chain
+vector<P> convexHull(vector<P>& pts) {
 
-void convex_hull(vector<pt>& a, bool include_collinear = false) {
-    pt p0 = *min_element(a.begin(), a.end(), [](pt a, pt b) {
-        return make_pair(a.y, a.x) < make_pair(b.y, b.x);
-    });
-    sort(a.begin(), a.end(), [&p0](const pt& a, const pt& b) {
-        int o = orientation(p0, a, b);
-        if (o == 0)
-            return (p0.x-a.x)*(p0.x-a.x) + (p0.y-a.y)*(p0.y-a.y)
-                < (p0.x-b.x)*(p0.x-b.x) + (p0.y-b.y)*(p0.y-b.y);
-        return o < 0;
-    });
-    if (include_collinear) {
-        int i = (int)a.size()-1;
-        while (i >= 0 && collinear(p0, a[i], a.back())) i--;
-        reverse(a.begin()+i+1, a.end());
+    sort(pts.begin(), pts.end());
+    pts.erase(unique(pts.begin(), pts.end()), pts.end());
+
+    int n = pts.size();
+    if (n <= 1) return pts;
+    vector<P> low, up;
+    // Build lower hull
+    for (auto &p : pts) {
+        while (low.size() >= 2 && 
+               cross(low[low.size()-2], low.back(), p) <= 0)
+            low.pop_back();
+        low.push_back(p);
+    }
+    // Build upper hull
+    for (int i = (int)pts.size()-1; i >= 0; i--) {
+        auto p = pts[i];
+        while (up.size() >= 2 && 
+               cross(up[up.size()-2], up.back(), p) <= 0)
+            up.pop_back();
+        up.push_back(p);
     }
 
-    vector<pt> st;
-    for (int i = 0; i < (int)a.size(); i++) {
-        while (st.size() > 1 && !cw(st[st.size()-2], st.back(), a[i], include_collinear))
-            st.pop_back();
-        st.push_back(a[i]);
-    }
-
-    if (include_collinear == false && st.size() == 2 && st[0] == st[1])
-        st.pop_back();
-
-    a = st;
+    low.pop_back();
+    up.pop_back();
+    low.insert(low.end(), up.begin(), up.end());
+    return low; // counter-clockwise order
 }
 void solve(){
     int n;
-    cin>>n;
-    vector<pt>points(n);
-    for(int i=0;i<n;i++){
-        cin>>points[i].x>>points[i].y;
-    }
-    convex_hull(points, true);
-    cout<<points.size()<<"\n";
-    for(auto &p:points){
-        cout<<p.x<<" "<<p.y<<"\n";
+    while(cin>>n,n){
+        vector<P> pts(n);
+        for(int i=0;i<n;i++){
+            cin>>pts[i].x>>pts[i].y;
+        }
+        vector<P> hull = convexHull(pts);
+        cout<<hull.size()<<endl;
+        for(auto p:hull){
+            cout<<p.x<<" "<<p.y<<endl;
+        }
     }
 
 }

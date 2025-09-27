@@ -1,1 +1,0 @@
-{"name":"Local: Robertson_multiplication","url":"d:\\CPP\\Robertson_multiplication.cpp","tests":[{"id":1698601287393,"input":"10110011\n11010101","output":"0001100111011110"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Robertson_multiplication.cpp","group":"local","local":true}

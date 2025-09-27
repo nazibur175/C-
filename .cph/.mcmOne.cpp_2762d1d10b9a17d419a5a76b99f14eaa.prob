@@ -1,1 +1,0 @@
-{"name":"Local: mcmOne","url":"d:\\CPP\\mcmOne.cpp","tests":[{"id":1709133051584,"input":"1+2*3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\mcmOne.cpp","group":"local","local":true}

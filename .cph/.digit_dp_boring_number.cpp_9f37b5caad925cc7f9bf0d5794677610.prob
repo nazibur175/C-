@@ -1,1 +1,0 @@
-{"name":"Local: digit_dp_boring_number","url":"d:\\CPP\\digit_dp_boring_number.cpp","tests":[{"id":1709268244087,"input":"3\n5 15\n120 125\n779 783","output":"6\n3\n2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\digit_dp_boring_number.cpp","group":"local","local":true}

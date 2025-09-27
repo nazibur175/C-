@@ -15,7 +15,7 @@ int query(int ind){
     return sum;
     
 }
-int update(int ind,int x,int n){
+void update(int ind,int x,int n){
     while (ind<=n)
     {
         tree[ind]+=x;
