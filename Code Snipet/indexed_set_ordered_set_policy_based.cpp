@@ -21,3 +21,6 @@
 //order_of_key (k) : Number of items strictly smaller than k .
 //int x = s.order_of_key(a[i]);
 //find_by_order(k) : K-th element in a set (counting from zero). It's Return Iterator
+
+  // remove 1st index’s value
+  // o_set.erase(o_set.find_by_order(1))<<endl;

@@ -27,7 +27,7 @@ int main(){
    bool ans;
     for(int i=1;i<n;i++){
         if(vis[i]==0){
-            ans = dfs(1);
+            ans = dfs(i);
           if(ans==true)
             break;
         }

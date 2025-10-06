@@ -13,7 +13,7 @@ int query(){
     int i=rand(1,n);
     int j=rand(1,n);
     if(i==j) return 0;
-    cout<<<<i<<' '<<j<<endl;
+    cout<<i<<' '<<j<<endl;
     cout<<flush;
     int x;
     cin>>x;

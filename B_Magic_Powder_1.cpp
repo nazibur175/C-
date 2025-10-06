@@ -4,7 +4,7 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 int n,k;
-const int N=1000+9;
+const int N=100000+9;
 int a[N];
 int b[N];
 int ok(int mid){
@@ -33,7 +33,7 @@ void solve(){
     for(int i=0;i<n;i++) cin>>b[i];
 
     int l=0;
-    int r=2000+1;
+    int r=2e9+1;
     while (r-l>1)
     {
         int mid = (l+r)/2;
