@@ -1,15 +1,3 @@
 Comparing files wrong_output.out and CORRECT_OUTPUT.OUT
-***** wrong_output.out
-12
-10
-16
-8
-12
-***** CORRECT_OUTPUT.OUT
-12
-9
-16
-7
-12
-*****
+FC: no differences encountered
 

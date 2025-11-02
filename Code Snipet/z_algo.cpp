@@ -22,7 +22,8 @@ vector<int>z_maker(string &s){
     return zv;  
 }
 void solve(){
-    string s="abbaabba";
+    // string s="abbaabbaab";
+    string s="aaa";
     vector<int>v=z_maker(s);
     cout<<s<<endl;
     for(auto x:v) cout<<x<<" ";

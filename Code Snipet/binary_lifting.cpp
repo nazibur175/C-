@@ -17,7 +17,7 @@ void solve(){
 
     for(int i=N-1;i>=0;i--){
         int nw= cr|(1<<i);
-        if(nw<n && nw<x){
+        if(nw<n && a[nw]<x){
             cr=nw;
         }
     }

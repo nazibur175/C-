@@ -3,49 +3,74 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-const int max_n=1e6;
-int tree[max_n];
-int query(int ind){
-    int sum=0;
-    while (ind>0)
-    {
-        sum+=tree[ind];
-        ind-=ind & (-ind);
-    }
-    return sum;
-    
-}
-// index, value, size of array
-void update(int ind,int x,int n){
-    while (ind<=n)
-    {
-        tree[ind]+=x;
-        ind+=ind & (-ind);
-    }
-    
+bool cmp(pair<int,int>&x, pair<int,int>&y){
+    return (x.first - x.second) > (y.first - y.second);
 }
 void solve(){
-    int n;
-    cin>>n;
-    int a[n+10]={0};
-    for(int i=1;i<=n;i++){
-        cin>>a[i];
-        update(i,1,n);
-    }
-    for(int i=1;i<=n;i++){
-        int x;
-        cin>>x;
-        int l=0, r=n;
-        while(r-l>1){
-            int mid=(l+r)/2;
-            if(query(mid)>=x) r=mid;
-            else l=mid;
+    test{
+        int n,m;
+        cin>>n>>m;
+        vector<pair<int,int>>b_boro, a_boro;
+        for(int i=0;i<n;i++){
+            int x,y;
+            cin>>x>>y;
+            if(y>x){
+                b_boro.push_back({y,x});
+            }
+            else a_boro.push_back({y,x});
         }
-        cout<<a[r];
-        if(i!=n) cout<<" ";
-        update(r,-1,n);
+
+        sort(b_boro.begin(),b_boro.end(),cmp);
+        int cur_house=m;
+        int ans=0;
+        int i=0;
+        int bosaichi=0;
+        pair<int,int>last;
+        for(;i<b_boro.size();i++){
+            int bosainai= n-(bosaichi+1);
+            if((cur_house-2) >= bosainai){
+                ans+=b_boro[i].first;
+                bosaichi++;
+                cur_house-=2;
+                last={b_boro[i].first,b_boro[i].second};
+            }
+            else break;
+        }
+        if((n-bosaichi)==1){
+            pair<int,int>p;
+            //i=bosaichi;
+            // for(;i<b_boro.size();i++){
+            //     ans+=b_boro[i].first;
+            // }
+            // for(auto x:a_boro){
+            //     ans+=x.first;
+            // }
+            if(a_boro.size()==1){
+                p=a_boro.front();
+            }
+            else {
+                p=b_boro.back();
+            }
+            // cout<<ans<<endl;
+            // cout<<last.first<<" "<<last.second<<endl;
+            // cout<<p.first<<" "<<p.second<<endl;
+            ans = max((ans - last.first + last.second + p.second), ans + p.first);
+            
+        }
+        else {
+            i=bosaichi;
+            for(;i<b_boro.size();i++){
+                ans+=b_boro[i].second;
+            }
+            for(auto x:a_boro){
+                ans+=x.second;
+            }
+
+        }
+        
+        cout<<ans<<endl;
     }
-    cout<<endl;
+
 }
 int32_t main()
 {

@@ -15,7 +15,7 @@ int get_kth(int a,int b,int k){
 	if(k==2) return b;
 	return ((a*f[k-2])%mod+(b*f[k-1])%mod)%mod;
 }
-// Here fibonacci first member is a, nex b and so on. 
+// Here fibonacci first member is a, next b and so on. 
 // If I want to get first n member sum the call fibo_sum()
  int fibo_sum(int a, int b, int n){
     return ((get_kth(a,b,n+2) - b)%mod + mod )%mod;

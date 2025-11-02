@@ -3,80 +3,92 @@ using namespace std;
 #define int long long 
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
-struct P{
-    int x, y;
-    bool operator < (const P& p) const {
-        return x < p.x || (x == p.x && y < p.y);
-    }
-    bool operator == (const P& p) const {
-        return x == p.x && y == p.y;
-    }
-};
 
-// Cross product of OA and OB 
-int cross(const P& O, const P& A, const P& B) {
-    return (A.x - O.x) * (B.y - O.y) - 
-           (A.y - O.y) * (B.x - O.x);
-}
+pair<int, int> go[4][70][70],go_s[70][70],go_e[70][70],go_w[70][70];
 
-//Monotone Chain
-vector<P> convexHull(vector<P>& pts) {
+// 0 -> south
+// 1 -> north
+// 2 -> east
+// 3 -> west
 
-    sort(pts.begin(), pts.end());
-    pts.erase(unique(pts.begin(), pts.end()), pts.end());
-
-    int n = pts.size();
-    if (n <= 1) return pts;
-    vector<P> low, up;
-    // Build lower hull
-    for (auto &p : pts) {
-        while (low.size() >= 2 && 
-               cross(low[low.size()-2], low.back(), p) <= 0)
-            low.pop_back();
-        low.push_back(p);
-    }
-    // Build upper hull
-    for (int i = (int)pts.size()-1; i >= 0; i--) {
-        auto p = pts[i];
-        while (up.size() >= 2 && 
-               cross(up[up.size()-2], up.back(), p) <= 0)
-            up.pop_back();
-        up.push_back(p);
-    }
-
-    low.pop_back();
-    up.pop_back();
-    low.insert(low.end(), up.begin(), up.end());
-    return low; // counter-clockwise order
-}
 void solve(){
-    int n;
-    cin>>n;
-    vector<P> pts(n);
-    for(int i=0;i<n;i++){
-        cin>>pts[i].x>>pts[i].y;
-    }
-    vector<P> hull = convexHull(pts);
-    int s;
-    cin>>s;
-    vector<P>small(s);
-    for(int i=0;i<s;i++){
-        cin>>small[i].x>>small[i].y;
-    }
-    int ans=0;
-    for(auto p:small){
-        if(cross(hull[0],hull[1],p)<0 || cross(hull[0],hull.back(),p)>0) continue;
-        int l=0,r=hull.size()-1;
-        bool f=0;
-        while(r-l>1){
-            int mid=(l+r)/2;
-            if(cross(hull[0],hull[mid],p)>=0) l=mid;
-            else r=mid;
-        }
-        if(cross(hull[l],hull[l+1],p)>=0) ans++;
+    int n, m;
+    cin >> n >> m;
 
+    string a[n], b[n];
+    for(int i = 0; i < n; i++) cin >> ar[i];
+    for(int i = 0; i < n; i++) cin >> br[i];
+
+    // South
+    for(int j = 0; j < n; j++){
+        pair<int, int> p = {-1, -1};
+        for(int i = 0; i < n; i++){
+            if(ar[i][j] == '#') {
+                go[0][i][j] = {-1, -1};
+                p = {-1, -1};
+            }
+            else if(p == {-1, -1}){
+                p = {i, j};
+                go[0][i][j] = p;
+            }
+            else{
+                go[0][i][j] = p;
+            }
+        }
     }
-    cout<<ans<<endl;
+
+    // North
+    for(int j = 0; j < n; j++){
+        pair<int, int> p = {-1, -1};
+        for(int i = n - 1; i >= 0; i--){
+            if(ar[i][j] == '#') {
+                go[1][i][j] = {-1, -1};
+                p = {-1, -1};
+            }
+            else if(p == {-1, -1}){
+                p = {i, j};
+                go[1][i][j] = p;
+            }
+            else{
+                go[1][i][j] = p;
+            }
+        }
+    }
+
+    // East
+    for(int i = 0; i < n; i++){
+        pair<int, int> p = {-1, -1};
+        for(int j = 0; j < n; j++){
+            if(ar[i][j] == '#') {
+                go[2][i][j] = {-1, -1};
+                p = {-1, -1};
+            }
+            else if(p == {-1, -1}){
+                p = {i, j};
+                go[2][i][j] = p;
+            }
+            else{
+                go[2][i][j] = p;
+            }
+        }
+    }
+    // West
+    for(int i = 0; i < n; i++){
+        pair<int, int> p = {-1, -1};
+        for(int j = n - 1; j >= 0; j--){
+            if(ar[i][j] == '#') {
+                go[3][i][j] = {-1, -1};
+                p = {-1, -1};
+            }
+            else if(p == {-1, -1}){
+                p = {i, j};
+                go[3][i][j] = p;
+            }
+            else{
+                go[3][i][j] = p;
+            }
+        }
+    }
 
 }
 int32_t main()

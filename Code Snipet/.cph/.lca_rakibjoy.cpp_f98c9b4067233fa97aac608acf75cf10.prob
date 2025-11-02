@@ -1,0 +1,1 @@
+{"name":"Local: lca_rakibjoy","url":"d:\\CPP\\Code Snipet\\lca_rakibjoy.cpp","tests":[{"id":1760505686282,"input":"1\n5 3\n1 2\n1 3\n3 4\n3 5\n1 2\n2 5\n4 5","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\Code Snipet\\lca_rakibjoy.cpp","group":"local","local":true}

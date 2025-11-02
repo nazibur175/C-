@@ -8,6 +8,9 @@
 //Optional
 //template<typename T>using orderded_set = tree<T , null_type , less<T> , rb_tree_tag , tree_order_statistics_node_update>;
 
+// Multiset 
+//template<typename T>using orderded_multiset = tree<T , null_type , less_equal<T> , rb_tree_tag , tree_order_statistics_node_update>;
+
 
 // We can use here pair to store dupplicate elements
 // s.insert({a[i],i});
@@ -24,3 +27,11 @@
 
   // remove 1st index’s value
   // o_set.erase(o_set.find_by_order(1))<<endl;
+
+
+  // For pair value 
+  // typedef tree<pair<int, int>,
+  //    null_type,
+  //    less<pair<int, int>>,
+  //    rb_tree_tag,
+  //    tree_order_statistics_node_update> ordered_set;

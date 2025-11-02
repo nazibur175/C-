@@ -74,6 +74,9 @@ double get_angle(P a, P b){
     double costheta = dot(a,b)/(norm(a)*norm(b));
     return acos(max(-1.0,min(1.0,costheta)));
 }
+
+// Think about Translation A ke B er jaigai nite gele A-B 
+// A er সাপেক্ষে B কে রোটেট করতে চাইলে আগে A-B then rotate it then again add B 
 P rotate(P p, double theta){
     double rad = deg_to_rad(theta);
     return P{p.x*cos(rad)-p.y*sin(rad), p.x*sin(rad)+p.y*cos(rad)};
@@ -83,6 +86,34 @@ bool segParallel(P a, P b, P c, P d){
 }
 bool pointOnSegment(P a, P b, P c){
     return sign(cross2(a,b,c))==0 && sign(dot(a-c,b-c))<=0;
+}
+
+// Returns intersection point of lines (p1,p2) and lines (p3,p4)
+P lineIntersection(P p1, P p2, P p3, P p4) {
+    // Line AB represented as a1x + b1y = c1
+    double a1 = p2.y - p1.y;
+    double b1 = p1.x - p2.x;
+    double c1 = a1 * p1.x + b1 * p1.y;
+
+    // Line CD represented as a2x + b2y = c2
+    double a2 = p4.y - p3.y;
+    double b2 = p3.x - p4.x;
+    double c2 = a2 * p3.x + b2 * p3.y;
+    double det = a1 * b2 - a2 * b1;
+
+    if (fabs(det) < 1e-9) {
+        // Lines are parallel or coincident; return a "NaN" point
+        return {-mod,-mod};
+    }
+    double x = (b2 * c1 - b1 * c2) / det;
+    double y = (a1 * c2 - a2 * c1) / det;
+    return {x, y};
+}
+
+double triangleArea(P p1, P p2, P p3) {
+    return fabs(p1.x*(p2.y - p3.y) + 
+                p2.x*(p3.y - p1.y) + 
+                p3.x*(p1.y - p2.y)) / 2.0;
 }
 
 void solve(){

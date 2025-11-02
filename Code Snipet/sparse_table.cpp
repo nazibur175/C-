@@ -6,6 +6,7 @@ using namespace std;
 #define test int t; cin>>t; while(t--)
 const int N=1e6;
 const int M=25;
+// pos, pow
 int m[N][M];
 int query(int l,int r){
     int length=r-l+1;

@@ -1,78 +1,97 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-#define int long long 
-#define   mod             1000000007
+#define int long long
 #define test int t; cin>>t; while(t--)
-const int N=1e5+9;
-vector<int>edge[N];
-int start;
-int ed;
-int vis[N];
-int path[N];
+const int inf=1e9;
+const int N = 2e5 + 5;
+int arr[N];
+int tree[4 * N];
 
-int dfs(int node, int par){
-    vis[node]=1;
-    for(auto x:edge[node]){
-        if (vis[x] == 0) {
-        path[x] = node;
-        int xx = dfs(x, node);
-        if (xx == 1) return 1;
+struct SegTree {
+    #define lf (root << 1)
+    #define rt ((root << 1) | 1)
+
+    SegTree() {}
+
+    inline int milao(int x, int y) {
+        return min(x,y);
     }
-    else if (vis[x] == 1) { 
-        ed = node;
-        start = x;
-        return 1;
+
+    inline void prop(int root) {
+        tree[root] = milao(tree[lf], tree[rt]);
     }
+
+    void build(int root, int lo, int hi) {
+        if (lo == hi) {
+            tree[root] = arr[lo];
+            return;
+        }
+        int mid = (lo + hi) >> 1;
+        build(lf, lo, mid);
+        build(rt, mid + 1, hi);
+        prop(root);
     }
-    vis[node]=2;
-    return -1;
-}
-void solve(){
-    int n,m;
-    cin>>n>>m;
-    for(int i=0;i<m;i++){
-        int x,y;
-        cin>>x>>y;
-        edge[x].push_back(y);
-        //edge[y].push_back(x);
+
+    void update(int root, int lo, int hi, int idx, int val) {
+        if (lo == hi) {
+            tree[root] = val;
+            return;
+        }
+        int mid = (lo + hi) >> 1;
+        if (idx <= mid)
+            update(lf, lo, mid, idx, val);
+        else
+            update(rt, mid + 1, hi, idx, val);
+        prop(root);
     }
-    //cout<<dfs(1,0)<<endl;
-    int f=0;
-    for(int i=1;i<=n;i++){
-        if(vis[i]==0){
-            int x=dfs(i,0);
-            if(x==1) {
-                f=1;
-                break;
+
+    int query(int root, int lo, int hi, int i, int j) {
+        if (j < lo || hi < i) return inf;
+        if (i <= lo && hi <= j) return tree[root];
+        int mid = (lo + hi) >> 1;
+        return milao(query(lf, lo, mid, i, j), query(rt, mid + 1, hi, i, j));
+    }
+};
+
+void solve() {
+    // test{
+        // for(int i=1;i<=4*N;i++) tree[i]=0;
+        int n,k;
+        cin>>n>>k;
+        for(int i=1;i<=n;i++) cin>>arr[i];
+        for(int i=n+1;i<=2*n;i++){
+            arr[i]=arr[i-n];
+        }
+
+        SegTree seg;
+        seg.build(1,1,2*n);
+        
+        
+        for(int i=1;i<=n;i++){
+            int l=-1;
+            int r=n;
+            while (r-l>1)
+            {
+                int mid=(l+r)/2;
+                // int f=0;
+                int val=arr[i]+(mid*k);
+                if(seg.query(1,1,2*n,i+1,i+mid)<val){
+                    r=mid;
+                }
+                else l=mid;
             }
+            cout<<i<<" "<<r<<endl;
+            // cout<<((i+r)%(n+1))+1;
+            // if((i+r)%n==0) cout<<n;
+            // else cout<<(i+r)%n;
+            // if(i==n) cout<<endl;
+            // else cout<<" ";
         }
     }
-    // cout<<f<<endl;
-    // cout<<start<<" "<<ed<<endl;
-    vector<int>res;
-    res.push_back(start);
-    int val=ed;
-    while(val!=start){
-        res.push_back(val);
-        val=path[val];
-    }
-    res.push_back(start);
-    reverse(res.begin(),res.end());
-    if(f){
-        cout<<res.size()<<endl;
-        for(auto x:res){
-            cout<<x<<" ";
-        }
-    }
-    else 
-        cout<<"IMPOSSIBLE"<<endl;
+// }
 
-
-}
-int32_t main()
-{
-ios_base::sync_with_stdio(false);
-cin.tie(nullptr);
-solve();
-
+int32_t main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    solve();
 }

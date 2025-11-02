@@ -13,7 +13,6 @@ int query(int ind){
         ind-=ind & (-ind);
     }
     return sum;
-    
 }
 void update(int ind,int x,int n){
     while (ind<=n)
@@ -21,7 +20,6 @@ void update(int ind,int x,int n){
         tree[ind]+=x;
         ind+=ind & (-ind);
     }
-    
 }
 void solve(){
     int n;
@@ -46,10 +44,7 @@ void solve(){
             cin>>in>>val;
             update(in,val,n);
         }
-
     }
-
-
 }
 int32_t main()
 {

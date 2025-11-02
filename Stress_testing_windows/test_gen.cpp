@@ -91,14 +91,11 @@ void num(int l, int r, int n) {
 signed main()
 {
     
-       int tc=rand (1,10);
-	cout<<tc<<endl;
-	while(tc--){
-	int x=rand(1,10);
-       int y=rand(1,10);
-        
-       cout<<x<<" "<<y<<endl;
-}
-
-    
+       	int n;
+	n=rand(1,10);
+    cout<<n<<endl;
+	for(int i=1;i<=n;i++){
+	cout<<rand(1,10)<<endl;
+	}
+    return 0;
 }
