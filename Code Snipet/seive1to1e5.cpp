@@ -1,4 +1,4 @@
-// const int N=1e8;
+// const int N=1e7;
 //int prime[N+9];
 // vector<int> seive()
 // {

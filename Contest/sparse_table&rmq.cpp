@@ -7,6 +7,7 @@ using namespace std;
 const int N=1e6;
 const int M=25;
 int m[N][M];
+// O(1)
 int query(int l,int r){
     int length=r-l+1;
     int k=31-__builtin_clz(length);
