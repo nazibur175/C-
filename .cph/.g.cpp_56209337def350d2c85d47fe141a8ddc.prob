@@ -1,0 +1,1 @@
+{"name":"Local: g","url":"d:\\CPP\\g.cpp","tests":[{"id":1763116846701,"input":"1\nabracadabra\\0abraka","output":"19 11"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\CPP\\g.cpp","group":"local","local":true}

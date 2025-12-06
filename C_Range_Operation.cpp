@@ -4,29 +4,26 @@ using namespace std;
 #define   mod             1000000007
 #define test int t; cin>>t; while(t--)
 const int N = 1e5 + 9;
-int dp[N];
-int a[N];
-int b[N];
-int n;
-int cal(int idx){
-    if(idx==0)return 0;
-    if(dp[idx]!=-1)return dp[idx];
-    int temp=cal(idx-1);
-    int res=max(temp-a[idx], b[idx]-temp);
-    return dp[idx]=res;
-}
+const int inf = 1e13;
 void solve(){
     test{
+        int n;
         cin>>n;
-        memset(dp,-1,sizeof(dp));
+        int a[n+5]={0};
+        for(int i=1;i<=n;i++)cin>>a[i];
+        int pre[n+5]={0};
         for(int i=1;i<=n;i++){
-            cin>>a[i];
+            pre[i]=pre[i-1]+a[i];
         }
+        int ans=0;
+        int R=-inf;
+        int L=-inf;
         for(int i=1;i<=n;i++){
-            cin>>b[i];
+            L=max(L,i-(i*i)+pre[i-1]);
+            R=(i*i)+i-pre[i];
+            ans=max(ans,L+R);
         }
-        int ans=cal(n);
-        cout<<ans<<"\n";
+        cout<<pre[n]+ans<<endl;
     }
 
 }
